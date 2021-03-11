@@ -1,0 +1,13 @@
+--- News ---
+Manual news
+Brest, 09-03-2021 15:00
+
+ --- Advert ---
+Manual advert
+Actual until: 2021-04-01, 23 days left
+
+--- Vacancy ---
+Position: Manual QA
+Requirements: Testing basics
+Valid until: 08-04-2021
+
