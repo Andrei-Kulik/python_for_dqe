@@ -1,0 +1,12 @@
+type: news;
+content: my first News from txt file;
+city: brest
+/
+type: advert;
+content: road bike. Excellent conditions. low price. Call +123-456-789;
+ex-date: 2021-04-22
+/
+type: vacancy;
+position: DQE;
+requirements: Python, SQL;
+actual-days: 14

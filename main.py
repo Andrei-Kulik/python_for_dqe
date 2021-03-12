@@ -1,6 +1,30 @@
 import datetime
+# import os
+import re
 import sys
+
+import capitalize
 import classes
+
+
+def main():
+    print("Select the format of adding data (manual, txt) or type 'exit' to exit form the program:")
+    format = input().lower().strip()
+    if format == "exit":
+        sys.exit()
+    elif format in ("manual", "txt"):
+        processing(format)
+    else:
+        print("Incorrect format!")
+        main()
+
+
+def processing(format):
+    if format == "manual":
+        manual_processing()
+    elif format == "txt":
+        txt_processing()
+        print(".txt file processed successfully!")
 
 
 def manual_processing():
@@ -45,4 +69,51 @@ def manual_publication(publication_type):
         print("Vacancy added successfully!")
 
 
-manual_processing()
+def txt_processing():
+    print("Input filename (press 'Enter' to use '\\txt_input.txt'):")
+    filename = input()
+    if filename == "":
+        filename = 'txt_input.txt'
+    print(f"File name is {filename}")
+
+    with open(filename, 'r') as input_file:
+        initial_list = re.split("/", input_file.read().replace("\n", ""))
+        # print(initial_list)
+
+    list_of_publications = []
+    for elem in initial_list:
+        list_elem = elem.split(";")
+        d = dict()
+        for element in list_elem:
+            key, value = element.split(": ")
+            d[key.strip()] = value.strip()
+        list_of_publications.append(d)
+    # print(list_of_publications)
+
+    file_parsing(list_of_publications)
+
+    # os.remove(filename)
+
+
+def file_parsing(list_of_publications):
+    for elem in list_of_publications:
+        publication_type = elem["type"]
+        if publication_type == "news":
+            content = capitalize.capitalizing(elem["content"])
+            city = elem["city"]
+            news = classes.News(publication_type, content, city)
+            news.publish()
+        elif publication_type == "advert":
+            content = capitalize.capitalizing(elem["content"])
+            ex_date = datetime.datetime.strptime(elem["ex-date"], '%Y-%m-%d').date()
+            ad = classes.Advert(publication_type, content, ex_date)
+            ad.publish()
+        elif publication_type == "vacancy":
+            position = elem["position"]
+            requirements = elem["requirements"]
+            actual = int(elem["actual-days"])
+            vacancy = classes.Vacancy(publication_type, position, requirements, actual)
+            vacancy.publish()
+
+
+main()

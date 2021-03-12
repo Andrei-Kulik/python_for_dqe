@@ -11,3 +11,16 @@ Position: Manual QA
 Requirements: Testing basics
 Valid until: 08-04-2021
 
+--- News ---
+My first news from txt file. 
+Brest, 12-03-2021 17:37
+
+ --- Advert ---
+Road bike. Excellent conditions. Low price. Call +123-456-789. 
+Actual until: 2021-04-22, 41 days left
+
+--- Vacancy ---
+Position: DQE
+Requirements: Python, SQL
+Valid until: 26-03-2021
+
