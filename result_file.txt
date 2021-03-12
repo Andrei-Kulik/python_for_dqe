@@ -24,3 +24,12 @@ Position: DQE
 Requirements: Python, SQL
 Valid until: 26-03-2021
 
+--- News ---
+News for csv
+Minsk, 12-03-2021 17:44
+
+ --- News ---
+News for CSV
+Brest, 12-03-2021 17:44
+
+ 

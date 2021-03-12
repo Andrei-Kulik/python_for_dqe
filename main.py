@@ -5,6 +5,7 @@ import sys
 
 import capitalize
 import classes
+import csv_creating
 
 
 def main():
@@ -12,8 +13,9 @@ def main():
     format = input().lower().strip()
     if format == "exit":
         sys.exit()
-    elif format in ("manual", "txt"):
+    elif format in ("manual", "txt", "json", "xml"):
         processing(format)
+        add_csv()
     else:
         print("Incorrect format!")
         main()
@@ -31,6 +33,7 @@ def manual_processing():
     print("Select the type of new publication (news, advert, vacancy) or type 'exit' to exit form the program:")
     publication_type = input().lower().strip()
     if publication_type == "exit":
+        add_csv()
         sys.exit()
     elif publication_type in ("news", "advert", "vacancy"):
         manual_publication(publication_type)
@@ -114,6 +117,12 @@ def file_parsing(list_of_publications):
             actual = int(elem["actual-days"])
             vacancy = classes.Vacancy(publication_type, position, requirements, actual)
             vacancy.publish()
+
+
+def add_csv():
+    now = datetime.datetime.now().strftime("%m%d%H%M%S")
+    csv_creating.count_words('result_file.txt', f'words_count_{now}.csv')
+    csv_creating.count_letters('result_file.txt', f'letters_count_{now}.csv')
 
 
 main()
