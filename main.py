@@ -3,6 +3,7 @@ import json
 # import os
 import re
 import sys
+import xml.etree.ElementTree as et
 
 import capitalize
 import classes
@@ -10,7 +11,7 @@ import csv_creating
 
 
 def main():
-    print("Select the format of adding data (manual, txt, json) or type 'exit' to exit form the program:")
+    print("Select the format of adding data (manual, txt, json, xml) or type 'exit' to exit form the program:")
     format = input().lower().strip()
     if format == "exit":
         sys.exit()
@@ -31,6 +32,9 @@ def processing(format):
     elif format == "json":
         json_processing()
         print(".json file processed successfully!")
+    elif format == "xml":
+        xml_processing()
+        print(".xml file processed successfully!")
 
 
 def manual_processing():
@@ -136,6 +140,54 @@ def file_parsing(list_of_publications):
             actual = int(elem["actual-days"])
             vacancy = classes.Vacancy(publication_type, position, requirements, actual)
             vacancy.publish()
+
+
+def xml_processing():
+    print("Input filename (press 'Enter' to use '\\xml_input.xml'):")
+    filename = input()
+    if filename == "":
+        filename = 'xml_input.xml'
+    print(f"File name is {filename}")
+
+    global xml_content, xml_city, xml_ex_date, xml_position, xml_requirements, xml_actual
+    xml_file = et.parse(filename)
+    root = xml_file.getroot()
+
+    for child in root.iter():
+        if child.get("type") == "news":
+            for elem in child:
+                if elem.tag == "content":
+                    xml_content = capitalize.capitalizing(elem.text)
+                elif elem.tag == "city":
+                    xml_city = elem.text
+                else:
+                    pass
+            news = classes.News(child.get("type"), xml_content, xml_city)
+            news.publish()
+        elif child.get("type") == "advert":
+            for elem in child:
+                if elem.tag == "content":
+                    xml_content = capitalize.capitalizing(elem.text)
+                elif elem.tag == "ex-date":
+                    xml_ex_date = datetime.datetime.strptime(elem.text, '%Y-%m-%d').date()
+                else:
+                    pass
+            ad = classes.Advert(child.get("type"), xml_content, xml_ex_date)
+            ad.publish()
+        elif child.get("type") == "vacancy":
+            for elem in child:
+                if elem.tag == "position":
+                    xml_position = elem.text
+                elif elem.tag == "requirements":
+                    xml_requirements = elem.text
+                elif elem.tag == "actual-days":
+                    xml_actual = int(elem.text)
+                else:
+                    pass
+            vacancy = classes.Vacancy(child.get("type"), xml_position, xml_requirements, xml_actual)
+            vacancy.publish()
+
+    # os.remove(filename)
 
 
 def add_csv():

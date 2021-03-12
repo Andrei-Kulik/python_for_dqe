@@ -32,4 +32,37 @@ Minsk, 12-03-2021 17:44
 News for CSV
 Brest, 12-03-2021 17:44
 
- 
+ --- News ---
+My first json news. 
+Brest, 12-03-2021 17:53
+
+ --- Advert ---
+My first json advert. 
+Actual until: 2021-05-22, 71 days left
+
+--- Vacancy ---
+Position: Software Engineer
+Requirements: JSON
+Valid until: 22-03-2021
+
+--- News ---
+First news from xml. 
+Minsk, 12-03-2021 20:34
+
+ --- News ---
+Second news from xml. 
+Brest, 12-03-2021 20:34
+
+ --- Advert ---
+First advert from xml. 
+Actual until: 2021-06-01, 81 days left
+
+--- Advert ---
+Another advert from xml. 
+Actual until: 2021-05-01, 50 days left
+
+--- Vacancy ---
+Position: HR
+Requirements: 2+ years of experience
+Valid until: 11-04-2021
+

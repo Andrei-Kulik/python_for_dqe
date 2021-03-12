@@ -1,0 +1,23 @@
+<publications_set>
+    <publication type = "news">
+        <content>first news from xml</content>
+        <city>Minsk</city>
+    </publication>
+    <publication type = "news">
+        <content>second news from xml</content>
+        <city>Brest</city>
+    </publication>
+    <publication type = "advert">
+        <content>first advert from xml</content>
+        <ex-date>2021-06-01</ex-date>
+    </publication>
+    <publication type = "advert">
+        <content>another advert from xml</content>
+        <ex-date>2021-05-01</ex-date>
+    </publication>
+    <publication type = "vacancy">
+        <position>HR</position>
+        <requirements>2+ years of experience</requirements>
+        <actual-days>30</actual-days>
+    </publication>
+</publications_set>
