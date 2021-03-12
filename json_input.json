@@ -1,0 +1,18 @@
+[
+  {
+    "type": "news",
+    "content": "my first json news",
+    "city": "brest"
+  },
+  {
+    "type": "advert",
+    "content": "my first json advert",
+    "ex-date": "2021-05-22"
+  },
+  {
+    "type": "vacancy",
+    "position": "Software Engineer",
+    "requirements": "JSON",
+    "actual-days": 10
+  }
+]

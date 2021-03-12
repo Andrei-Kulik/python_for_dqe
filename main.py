@@ -1,4 +1,5 @@
 import datetime
+import json
 # import os
 import re
 import sys
@@ -9,7 +10,7 @@ import csv_creating
 
 
 def main():
-    print("Select the format of adding data (manual, txt) or type 'exit' to exit form the program:")
+    print("Select the format of adding data (manual, txt, json) or type 'exit' to exit form the program:")
     format = input().lower().strip()
     if format == "exit":
         sys.exit()
@@ -27,6 +28,9 @@ def processing(format):
     elif format == "txt":
         txt_processing()
         print(".txt file processed successfully!")
+    elif format == "json":
+        json_processing()
+        print(".json file processed successfully!")
 
 
 def manual_processing():
@@ -91,6 +95,21 @@ def txt_processing():
             key, value = element.split(": ")
             d[key.strip()] = value.strip()
         list_of_publications.append(d)
+    # print(list_of_publications)
+
+    file_parsing(list_of_publications)
+
+    # os.remove(filename)
+
+
+def json_processing():
+    print("Input filename (press 'Enter' to use '\\json_input.json'):")
+    filename = input().strip()
+    if filename == "":
+        filename = 'json_input.json'
+    print(f"File name is {filename}")
+
+    list_of_publications = json.load((open(filename)))
     # print(list_of_publications)
 
     file_parsing(list_of_publications)
