@@ -60,6 +60,7 @@ def manual_publication(publication_type):
         news = classes.News(publication_type, content, city)
         news.publish()
         print("News added successfully!")
+        news.add_database()
     elif publication_type == "advert":
         print("Type the text of your advert:")
         content = input()
@@ -68,6 +69,7 @@ def manual_publication(publication_type):
         ad = classes.Advert(publication_type, content, ex_date)
         ad.publish()
         print("Advertise added successfully!")
+        ad.add_database()
     elif publication_type == "vacancy":
         print("Type the name of vacancy:")
         vacancy = input()
@@ -78,6 +80,7 @@ def manual_publication(publication_type):
         vacancy = classes.Vacancy(publication_type, vacancy, requirements, actual)
         vacancy.publish()
         print("Vacancy added successfully!")
+        vacancy.add_database()
 
 
 def txt_processing():
@@ -129,17 +132,20 @@ def file_parsing(list_of_publications):
             city = elem["city"]
             news = classes.News(publication_type, content, city)
             news.publish()
+            news.add_database()
         elif publication_type == "advert":
             content = capitalize.capitalizing(elem["content"])
             ex_date = datetime.datetime.strptime(elem["ex-date"], '%Y-%m-%d').date()
             ad = classes.Advert(publication_type, content, ex_date)
             ad.publish()
+            ad.add_database()
         elif publication_type == "vacancy":
             position = elem["position"]
             requirements = elem["requirements"]
             actual = int(elem["actual-days"])
             vacancy = classes.Vacancy(publication_type, position, requirements, actual)
             vacancy.publish()
+            vacancy.add_database()
 
 
 def xml_processing():
@@ -164,6 +170,7 @@ def xml_processing():
                     pass
             news = classes.News(child.get("type"), xml_content, xml_city)
             news.publish()
+            news.add_database()
         elif child.get("type") == "advert":
             for elem in child:
                 if elem.tag == "content":
@@ -174,6 +181,7 @@ def xml_processing():
                     pass
             ad = classes.Advert(child.get("type"), xml_content, xml_ex_date)
             ad.publish()
+            ad.add_database()
         elif child.get("type") == "vacancy":
             for elem in child:
                 if elem.tag == "position":
@@ -186,6 +194,7 @@ def xml_processing():
                     pass
             vacancy = classes.Vacancy(child.get("type"), xml_position, xml_requirements, xml_actual)
             vacancy.publish()
+            vacancy.add_database()
 
     # os.remove(filename)
 
